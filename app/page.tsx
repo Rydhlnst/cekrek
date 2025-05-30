@@ -1,9 +1,9 @@
-import { Camera } from "@/components/Camera";
+import { CameraFixed } from "@/components/CameraFixed";
 
 export default function Home() {
   return (
     <div>
-      <Camera/>
+      <CameraFixed/>
     </div>
   );
 }

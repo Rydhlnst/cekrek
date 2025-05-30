@@ -21,10 +21,7 @@ export function Navbar() {
         {/* Right Actions */}
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" asChild>
-            <a href="#features">Features</a>
-          </Button>
-          <Button variant="ghost" size="sm" asChild>
-            <a href="#gallery">Gallery</a>
+            <Link href="/changelog">Changelog</Link>
           </Button>
           <ModeToggle />
         </div>

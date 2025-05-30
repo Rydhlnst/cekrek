@@ -560,7 +560,7 @@ export function Camera() {
     setSelectedFilter("none");
     const defaultTemplate = canvasTemplates.find(t => t.value === "white") || canvasTemplates[0];
     setSelectedTemplate(defaultTemplate);
-    setCustomText("SnapIt Booth © 2025");
+    setCustomText("");
     setRetakeIndex(null);
     if (videoRef.current) { 
         if (videoRef.current.paused) videoRef.current.play();

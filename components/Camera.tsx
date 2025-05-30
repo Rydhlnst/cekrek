@@ -75,7 +75,7 @@ export function Camera() {
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [stripCount, setStripCount] = useState<4 | 8>(4);
   const [stripPreview, setStripPreview] = useState<string | null>(null); // This will hold the DataURL of the generated strip
-  const [customText, setCustomText] = useState("SnapIt Booth © 2025");
+  const [customText, setCustomText] = useState("");
   const [previewStamps, setPreviewStamps] = useState<EmojiStamp[]>([]);
   // const [overlayStamps, setOverlayStamps] = useState<EmojiStamp[]>([]); // This state was unused, consider removing if not needed
   const [selectedTemplate, setSelectedTemplate] = useState<CanvasTemplate>(canvasTemplates[0]);

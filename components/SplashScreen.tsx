@@ -49,7 +49,7 @@ export default function SplashScreen({ children }: { children: React.ReactNode }
       >
         <div
           ref={iconRef}
-          className="text-3xl flex flex-row font-bold items-center space-x-3"
+          className="text-3xl flex flex-row font-bold items-center space-x-0 md:space-x-3"
         >
           <CameraIcon className="w-12 h-12" />
           <span className="hidden md:block">Cekrek!</span>

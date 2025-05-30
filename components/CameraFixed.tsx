@@ -43,7 +43,7 @@ export function CameraFixed() {
   const [retakeIndex, setRetakeIndex] = useState<number | null>(null);
 
   // Custom Hooks
-  useCameraStream(videoRef); // Handles camera start/stop
+  useCameraStream({ videoRef }); // Handles camera start/stop
 
   const handleImageCaptured = useCallback((dataUrl: string, completedRetakeIndex: number | null) => {
     setCapturedImages((prevImages) => {
@@ -135,7 +135,7 @@ export function CameraFixed() {
       <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl items-start">
         {/* LEFT: VIDEO + CONTROLS */}
         <div className="flex flex-col gap-4 w-full lg:flex-1">
-          <div className="relative aspect-video rounded-xl overflow-hidden bg-neutral-800 shadow-lg"> {/* Typically 16/9 or 4/3 */}
+          <div className="relative aspect-[4/3] lg:aspect-video rounded-xl overflow-hidden bg-neutral-800 shadow-lg"> {/* Typically 16/9 or 4/3 */}
             <video
               ref={videoRef}
               className={cn(

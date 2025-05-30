@@ -1,61 +1,78 @@
-import { Card, CardContent } from "@/components/ui/card";
+// app/changelog.tsx
+import ChangelogEntry from "@/components/ChangeLogEntry";
 import { CameraIcon } from "lucide-react";
+
+const sections = [
+  {
+    title: "✨ Fitur Baru & Peningkatan",
+    items: [
+      {
+        main: "Peningkatan Kualitas Gambar Strip & Anti-Distorsi:",
+        subItems: [
+          "Implementasi <code>drawRoundedImageWithCover</code> memastikan setiap foto dalam strip mengisi frame target (4:3) tanpa distorsi visual (gepeng), mirip efek <code>object-fit: cover</code>.",
+          "<strong>Penyesuaian Cerdas Hasil Kamera HP:</strong> Sistem kini memproses gambar mentah dari berbagai kamera ponsel dan secara otomatis menyesuaikannya agar presisi dalam format 4:3 tanpa merusak proporsi objek.",
+          "Resolusi ideal stream kamera sumber disarankan 1280x720.",
+        ],
+      },
+      {
+        main: "Pengalaman Pengguna (UX):",
+        subItems: [
+          "<strong>Pratinjau Video Responsif:</strong> Tampilan pratinjau video kini menyesuaikan ukuran layar.<ul class='list-disc ml-6'><li>Di layar kecil (mobile): Aspect ratio 4:3.</li><li>Di layar besar (desktop): Aspect ratio 16:9.</li><li>Perubahan ini dicapai dengan CSS, stream tetap 16:9 untuk kualitas optimal.</li></ul>",
+          "Pesan placeholder informatif saat strip kosong.",
+          "Tombol <em>Download Strip</em> hanya muncul ketika strip penuh dan tidak sedang <em>Retake</em>.",
+          "Logika tombol \"Capture\" diperjelas (dengan <code>canCapture</code>).",
+          "Perubahan <code>stripCount</code> akan memangkas gambar jika melebihi batas.",
+          "Placeholder ditampilkan saat gambar individual gagal dimuat.",
+        ],
+      },
+      {
+        main: "Kustomisasi:",
+        subItems: [
+          'Teks default untuk strip: "Cekrek! © 2025", bisa diubah oleh pengguna.',
+        ],
+      },
+      {
+        main: "Performa:",
+        subItems: [
+          "Debouncing update pratinjau strip ditangani di <code>usePhotoStrip</code>.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "🛠️ Refaktorisasi & Perubahan Internal",
+    items: [
+      {
+        main: "Struktur Kode yang Lebih Modular:",
+        subItems: [
+          "Logika inti dipisah ke hooks: <code>useCameraStream</code>, <code>useImageCapture</code>, <code>usePhotoStrip</code>.",
+          "Fungsi utilitas dipindah ke <code>canvasUtils.ts</code> dan <code>filterUtils.ts</code>.",
+          "Konfigurasi dan TypeScript types ke <code>photoBooth.config.ts</code> dan <code>photoBooth.types.ts</code>.",
+        ],
+      },
+      "Stream video disetel konsisten ke 16:9 (via <code>useCameraStream</code>) dan disesuaikan di CSS untuk output 4:3.",
+      "Komponen <code>Camera.tsx</code> difokuskan pada UI dan manajemen state.",
+      "<code>calculateFrameLayout</code> jadi satu-satunya sumber layout posisi foto.",
+      "Pemeriksaan kesiapan video diperkuat sebelum proses capture.",
+    ],
+  },
+  {
+    title: "🐛 Perbaikan Bug",
+    items: [
+      "Perbaikan tipe <code>RefObject</code>: dari <code>RefObject&lt;Element&gt;</code> ke <code>RefObject&lt;Element | null&gt;</code>.",
+      "Gambar gepeng di strip telah diatasi dengan <code>drawRoundedImageWithCover</code> + aspect ratio tetap.",
+    ],
+  },
+];
 
 export default function Changelog() {
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
-        <div className="flex flex-row items-center space-x-3">
-            <span><CameraIcon className="w-8 h-8"/></span> 
-            <h1 className="text-3xl font-bold">Cekrek! Photobooth</h1>
-        </div>
-      <p className="text-muted-foreground">Versi: <strong>v1.1.0</strong> - 30 Mei 2025</p>
-
-      <Card>
-        <CardContent className="p-6 space-y-4">
-          <h2 className="text-xl font-semibold">✨ Fitur Baru & Peningkatan</h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Peningkatan kualitas gambar strip dengan <code>drawRoundedImageWithCover</code> (mirip <code>object-fit: cover</code>).</li>
-            <li>Resolusi kamera disarankan ke <strong>1280x720</strong> untuk hasil lebih tajam.</li>
-            <li>Pesan placeholder informatif saat strip kosong.</li>
-            <li>Tombol <em>Download Strip</em> hanya muncul saat strip penuh & tidak dalam mode <em>Retake</em>.</li>
-            <li>Logika status tombol &quot;Capture&quot; diperjelas (melalui <code>canCapture</code>).</li>
-            <li>Penyesuaian otomatis saat <code>stripCount</code> berubah (gambar dipotong jika melebihi batas baru).</li>
-            <li>Penanganan error pemuatan gambar individual → tampilkan placeholder.</li>
-            <li>Teks default strip: <em>&quot;Cekrek! © 2025&quot;</em> (dapat dikustom).</li>
-            <li>Debouncing update pratinjau strip ditangani di <code>usePhotoStrip</code>.</li>
-          </ul>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardContent className="p-6 space-y-4">
-          <h2 className="text-xl font-semibold">🛠️ Refaktorisasi & Perubahan Internal</h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Custom hooks modular:
-              <ul className="list-disc list-inside ml-6">
-                <li><code>useCameraStream</code> → kontrol stream kamera.</li>
-                <li><code>useImageCapture</code> → logika capture, countdown, filter.</li>
-                <li><code>usePhotoStrip</code> → generate/update strip foto (DataURL).</li>
-              </ul>
-            </li>
-            <li>Utilitas kanvas: <code>canvasUtils.ts</code> & <code>filterUtils.ts</code>.</li>
-            <li>Konfigurasi & tipe TypeScript dipisah ke <code>photoBooth.config.ts</code> dan <code>photoBooth.types.ts</code>.</li>
-            <li><code>Camera.tsx</code> kini fokus pada UI & state tinggi.</li>
-            <li><code>calculateFrameLayout</code> jadi satu-satunya sumber layout frame foto.</li>
-            <li>Pemeriksaan kesiapan video ditingkatkan sebelum capture dimulai.</li>
-          </ul>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardContent className="p-6 space-y-4">
-          <h2 className="text-xl font-semibold">🐛 Perbaikan Bug</h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>RefObject TypeScript error: <code>RefObject&lt;Element&gt;</code> → <code>RefObject&lt;Element | null&gt;</code>.</li>
-            <li>Masalah gambar gepeng di strip telah diatasi dengan <code>drawRoundedImageWithCover</code>.</li>
-          </ul>
-        </CardContent>
-      </Card>
-    </div>
+    <ChangelogEntry
+      version="v1.1.0"
+      date="30 Mei 2025"
+      appName="Cekrek! Photobooth"
+      icon={<CameraIcon className="w-8 h-8" />}
+      sections={sections}
+    />
   );
 }

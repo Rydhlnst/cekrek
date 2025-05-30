@@ -68,7 +68,7 @@ const sections = [
 export default function Changelog() {
   return (
     <ChangelogEntry
-      version="v1.1.0"
+      version="v1.1.1"
       date="30 Mei 2025"
       appName="Cekrek! Photobooth"
       icon={<CameraIcon className="w-8 h-8" />}

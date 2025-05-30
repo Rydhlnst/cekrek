@@ -609,7 +609,7 @@ export function Camera() {
               ref={videoRef}
               className={cn(
                 "w-full h-full object-cover transition-all duration-300",
-                isMirrored ? "scale-x-[-1]" : "scale-x-1",
+                isMirrored ? "scale-x-[-1]" : "scale-x-100",
                 getFilterClass()
               )}
               playsInline

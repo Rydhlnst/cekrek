@@ -43,7 +43,7 @@ export function CameraFixed() {
   const [retakeIndex, setRetakeIndex] = useState<number | null>(null);
 
   // Custom Hooks
-  useCameraStream({ videoRef }); // Handles camera start/stop
+  useCameraStream( videoRef ); // Handles camera start/stop
 
   const handleImageCaptured = useCallback((dataUrl: string, completedRetakeIndex: number | null) => {
     setCapturedImages((prevImages) => {
